@@ -138,21 +138,3 @@ else
     openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout $PRIVATE_KEY -out $CERTIFICATE_CRT -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
     echo "[+] Script finished."
 fi
-    echo "[+] Setting up Self-Signed Certificates. Creating Private Key: $PRIVATE_KEY and Certificate File: $CERTIFICATE_CRT. If you want to replace these, please do so in the ../certs directory"
-    mkdir ../certs
-    #Change to your company details
-    country=AU
-    state=NSW
-    locality=Sydney
-    commonname=$(domainname)
-    organization=Scrummage
-    organizationalunit=Scrummage
-    email=Scrummage@Scrummage.com
-
-    if [ -z $commonname ]; then
-        commonname=Scrummage
-    fi
-
-    openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout $PRIVATE_KEY -out $CERTIFICATE_CRT -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-    echo "[+] Script finished."
-fi
