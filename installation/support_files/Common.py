@@ -60,7 +60,7 @@ class Cryptography:
         BLOCK_SIZE = 16
         self.pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
         self.unpad = lambda s: s[:-ord(s[len(s) - 1:])]
-        self.filesystem_uuid = os.environ["DISK_UUID"]
+        self.filesystem_uuid = os.getenv("DISK_UUID")
 
         if self.filesystem_uuid is None:
             Message = "Environment Variables needed for cryptography don't exist."
@@ -149,7 +149,7 @@ def Get_Relative_Configuration() -> set:
         Configuration_File = "../app/plugins/common/config/config.config"
         DB_File = "../app/plugins/common/config/db.config"
 
-    if Current_PWD.endswith("support_files"):
+    elif Current_PWD.endswith("support_files"):
         Configuration_File = "../../app/plugins/common/config/config.config"
         DB_File = "../../app/plugins/common/config/db.config"
 
