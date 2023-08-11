@@ -221,8 +221,8 @@ if __name__ == "__main__":
             },
             "web_app": {
                 "debug": Empty_Bool,
-                "host": os.getenv("POSTGRES_IP"),
-                "port": os.getenv("POSTGRES_PORT"),
+                "host": os.getenv("SCRUMMAGE_IP"),
+                "port": os.getenv("SCRUMMAGE_PORT"),
                 "certificate_file": os.getenv("CERTIFICATE_CRT"),
                 "key_file": os.getenv("PRIVATE_KEY"),
                 "api_secret": os.getenv("API_SECRET"),
