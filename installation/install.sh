@@ -4,6 +4,8 @@ if [[ $EUID -ne 0 ]]; then
     echo "[-] This script must be run as root." 
     exit 0
 else
+    export SCRUMMAGE_IP="localhost"
+    export SCRUMMAGE_PORT=5000
     export DEBIAN_FRONTEND=noninteractive
     export POETRY_HOME=/opt/poetry
     export POETRY_VIRTUALENVS_IN_PROJECT=true
