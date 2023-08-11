@@ -5,11 +5,11 @@ if __name__ == "__main__":
     Empty_Bool: bool = bool()
     Temporary_DB_File: dict = {
         "postgresql": {
-            "host": os.environ["POSTGRES_IP"],
-            "port": os.environ["POSTGRES_PORT"],
-            "database": os.environ["DATABASE"],
-            "user": os.environ["USER"],
-            "password": os.environ["DB_PASS"]
+            "host": os.getenv("POSTGRES_IP"),
+            "port": os.getenv("POSTGRES_PORT"),
+            "database": os.getenv("DATABASE"),
+            "user": os.getenv("USER"),
+            "password": os.getenv("PASSWD")
         }
     }
     Configuration_Data: dict = {
@@ -175,11 +175,11 @@ if __name__ == "__main__":
                 "ticket_type": Empty_String
             },
             "postgresql": {
-                "host": os.environ["POSTGRES_IP"],
-                "port": os.environ["POSTGRES_PORT"],
-                "database": os.environ["DATABASE"],
-                "user": os.environ["USER"],
-                "password": os.environ["DB_PASS"]
+                "host": os.getenv("POSTGRES_IP"),
+                "port": os.getenv("POSTGRES_PORT"),
+                "database": os.getenv("DATABASE"),
+                "user": os.getenv("USER"),
+                "password": os.getenv("PASSWD")
             },
             "rtir": {
                 "ssl": Empty_Bool,
@@ -221,11 +221,11 @@ if __name__ == "__main__":
             },
             "web_app": {
                 "debug": Empty_Bool,
-                "host": os.environ["SCRUMMAGE_IP"],
-                "port": os.environ["SCRUMMAGE_PORT"],
-                "certificate_file": os.environ["CERTIFICATE_CRT"],
-                "key_file": os.environ["PRIVATE_KEY"],
-                "api_secret": os.environ["API_SECRET"],
+                "host": os.getenv("POSTGRES_IP"),
+                "port": os.getenv("POSTGRES_PORT"),
+                "certificate_file": os.getenv("CERTIFICATE_CRT"),
+                "key_file": os.getenv("PRIVATE_KEY"),
+                "api_secret": os.getenv("API_SECRET"),
                 "api_validity_minutes": 60,
                 "api_max_calls": 10,
                 "api_period_in_seconds": 60
@@ -240,6 +240,17 @@ if __name__ == "__main__":
     JSON_File = open(Configuration_File, "w")
     JSON_File.write(Common.Cryptography().configuration_encrypt(Common.JSON_Handler(Configuration_Data).Dump_JSON()))
     JSON_File.close()
+	
     JSON_File = open(DB_File, "w")
     JSON_File.write(Common.Cryptography().configuration_encrypt(Common.JSON_Handler(Temporary_DB_File).Dump_JSON()))
+    JSON_File.close()
+	
+	conf_json = "../app/plugins/common/config/config.json"
+	JSON_File = open(conf_json, "w")
+    JSON_File.write(Common.JSON_Handler(Configuration_Data).Dump_JSON())
+    JSON_File.close()
+	
+	db_json = "../app/plugins/common/config/db.json"
+    JSON_File = open(db_json, "w")
+    JSON_File.write(Common.JSON_Handler(Temporary_DB_File).Dump_JSON())
     JSON_File.close()
