@@ -240,17 +240,17 @@ if __name__ == "__main__":
     JSON_File = open(Configuration_File, "w")
     JSON_File.write(Common.Cryptography().configuration_encrypt(Common.JSON_Handler(Configuration_Data).Dump_JSON()))
     JSON_File.close()
-	
+    
     JSON_File = open(DB_File, "w")
     JSON_File.write(Common.Cryptography().configuration_encrypt(Common.JSON_Handler(Temporary_DB_File).Dump_JSON()))
     JSON_File.close()
-	
-	conf_json = "../app/plugins/common/config/config.json"
-	JSON_File = open(conf_json, "w")
+    
+    conf_json = "../app/plugins/common/config/config.json"
+    JSON_File = open(conf_json, "w")
     JSON_File.write(Common.JSON_Handler(Configuration_Data).Dump_JSON())
     JSON_File.close()
-	
-	db_json = "../app/plugins/common/config/db.json"
+    
+    db_json = "../app/plugins/common/config/db.json"
     JSON_File = open(db_json, "w")
     JSON_File.write(Common.JSON_Handler(Temporary_DB_File).Dump_JSON())
     JSON_File.close()
