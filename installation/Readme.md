@@ -11,7 +11,7 @@
 
 1. Clone this repository to the location where you want to run the web application.  
 ```console
-user@linux:~$ git clone [https://github.com/Skeleton022/Scrummage](https://github.com/Skeleton022/Scrummage)
+user@linux:~$ git clone https://github.com/Skeleton022/Scrummage
 ```
 2. Navigate to the installation directory.
 ```console
