@@ -12,7 +12,10 @@ else
     export PATH="$POETRY_HOME/bin:$PATH"
     apt update
     apt install software-properties-common -y
-    apt install -y python3-distutils python3-distutils-extra postgresql postgresql-contrib build-essential wget unzip git openssl
+    add-apt-repository ppa:deadsnakes/ppa -y
+    apt install -y python3.9 python3.9-distutils python3-distutils python3-distutils-extra postgresql postgresql-contrib build-essential wget unzip git openssl
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3.9 get-pip.py
     service postgresql start
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     apt install ./google-chrome-stable_current_amd64.deb -y
@@ -60,7 +63,7 @@ else
 
     echo "[+] Setting up python3 dependencies."
     echo $LINE
-    curl -sSL https://install.python-poetry.org/ | python3 -
+    curl -sSL https://install.python-poetry.org/ | python3.9 -
     poetry self update
     poetry install
     echo $LINE
@@ -70,6 +73,7 @@ else
     DISK_UUID=$(blkid -s UUID -o value /dev/$(lsblk -io KNAME | grep "sd" | head -n 1))
 
     if [ -z $DISK_UUID ]; then
+    	# Default value for DISK_UUID if nothing is found.
         DISK_UUID="UBQKry-4Hdy-LvA1-33n4-otfL-OvAH-C2sY8f"
     fi
     
@@ -78,10 +82,9 @@ else
     export DISK_UUID=$DISK_UUID
     export POSTGRES_IP="localhost"
     export POSTGRES_PORT=5432
-	  export DATABASE="scrummage"
+    export DATABASE="scrummage"
     export USER="scrummage"
     export PASSWD=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n 1)
-    echo "[i] Done!"
 
     # Change below value to "production" for prod environments.
     FLASK_ENVIRONMENT="development"
@@ -111,7 +114,9 @@ else
     
     echo "[+] Generating JSON configuration for the web application."
     poetry run python3 ./support_files/generate_configuration_files.py
-    echo "[+] poetry lefutott."
+
+    echo "[+] Installing requirements."
+    #python3.9 -m pip install -r requirements.txt
    
     chown $SUDO_USER:$SUDO_USER ../app/plugins/common/config/config.config
     chmod 770 ../app/plugins/common/config/config.config
