@@ -3,6 +3,18 @@
 # Installation
 **PLEASE FOLLOW CAREFULLY AS THERE IS INFORMATION PRINTED IN THE TERMINAL THAT WILL NEED TO BE RETAINED**
 
+```
+git clone https://github.com/Skeleton022/Scrummage
+cd Scrummage/installation
+nano install.sh
+
+python3.9 -m pip install -r requirements.txt
+export DISK_UUID="UBQKry-4Hdy-LvA1-33n4-otfL-OvAH-C2sY8f" # --> Because it is needed, but it's just shit... Insert here your disk uuid get it with: (blkid -s UUID -o value /dev/$(lsblk -io KNAME | grep "sd" | head -n 1))
+sudo chown -R $USER:$USER ../certs/
+cd ../app/
+python3.9 Scrummage.py
+```
+
 **This tool currently supports Debian, RHEL, and SUSE based Linux distributions.**  
 **Ubuntu versions over 18.04 are recommended. Ubuntu 20.04 is ideal.**
 
